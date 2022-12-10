@@ -1,0 +1,19 @@
+vs 설치 -> git 설치 -> github 설치 -> node.js 설치
+1. git 설치 : local repository를 사용함
+https://git-scm.com/downloads에서 다운로드후 설치
+
+2.github 설치 : git를 이용하며, 클라우드 서비스를 사용함
+https://github.com/의 우측상단에서 + 버튼 New Repository 선택 
+-> 다음 화면에서 리파지토리명과 공유여부 선택 
+-> 다음화면에서 [Set up in Desktop] 선택하여 클라이언트 다운로드하여 설치, https url 복사
+-> Github Desktop 프로그램 설정 : File > Options... 선택후 Account에서 로그인, Git에 Name, Email 정보 등록
+-> Github Desktop 프로그램에서 File > Clone repository... 선택후 URL탭에서 복사한 url을 붙여넣고, Local Path에 소스가 위치할 폴더를 선택하고 Clone 버튼을 클릭  
+-> 탐색기에서 소스 코드 위치 폴더에 소스를 만든후, Github Desktop 프로그램의 왼쪽 Changes 탭 하단에 Summary와 Description을 기술하고, Commit to main -> Publish를 클릭함
+
+용어 정리 : 
+add : 커밋할 파일들을 고른다.
+commit : 메시지와 함께 변경사항을 로컬 컴퓨터에 남긴다. commit후 publish해야 반영됨
+push : 원격 저장소에 코드를 업로드 한다.
+pull : 원격 저장소에 저장된 변경 내역을 내 컴퓨터에 반영한다.
+ 
+3. node.js 설치
