@@ -1,4 +1,4 @@
-vs 설치 -> git 설치 -> github 설치 -> node.js 설치
+vs 설치 -> git 설치 -> github 설치 -> node.js 설치 -> github에서 소스 내려받아 실행하기
 1. git 설치 : local repository를 사용함
 https://git-scm.com/downloads에서 다운로드후 설치
 
@@ -17,3 +17,21 @@ push : 원격 저장소에 코드를 업로드 한다.
 pull : 원격 저장소에 저장된 변경 내역을 내 컴퓨터에 반영한다.
  
 3. node.js 설치
+https://nodejs.org/ko/에서 LTS버전 다운로드후 설치
+-> cmd에서 설치 폴더로 이동후 npx create-react-app 프로젝트명(learn_react)
+-> cmd에서 cd learn_react
+-> code . //vs가 실행됨
+-> vs의 터미널 > 새터미널에서 npm start를 입력함
+
+react default 파일 설명 :
+package.json : 프로젝트 메타데이터, 라이브러리 정보 포함
+- "dependencies": {}, : 설치된 라이브러리 정보, 라이브러리는 /node_modules 폴더 하위에 존재함
+- "scripts": {}, : npm 명령어, start는 개발용서버를 실행함
+- "eslintConfig": {}, : eslink 설정임
+.gitignore : github 커밋시 제외할 폴더 및 파일정보 포함, github는 package.json만 참조함
+- # dependencies는 github 커밋시 제외할 폴더 정보임, /node_modules는 기본 제외됨
+
+4. github에서 소스코드 내려 받은 react 프로그램 실행하기
+-> cmd에서 npm i // node_modules를 다시 설치함
+
+강사 Repository : https://github.com/hbs30832/
