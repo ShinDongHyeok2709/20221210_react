@@ -95,7 +95,7 @@ user2.hello(); //undefined 출력
     - 객체나 배열의 값을 간결하게 할당할 수 있다.
     1) 객체는 변수 선언을 {}안에 해주면 된다. => 객체의 키값과 동일하게 작성해야 된다.
     2) 배열은 []안에 순서대로 변수명을 작성하면 배열에 저장된 인덱스에 따라 값이 할당된다.
-    =>객체 비구조할당에 비해 변수명을 자유롭게 지을 수 있다.
+    =>객체 비구조할당에 비해 변수명을 자유롭게 지을 수 있다. 키값 또한 알 필요가 없다.
 */
 
 //let name = user.name;
@@ -209,7 +209,7 @@ getData("자바스크립트")
 /*
     aysnc/await 무조건 쌍으로 사용함
       - 함수 키워드 앞에 async를 붙인다.
-      - await을 앞에 붙이면 resolve될 때까지 다음 코드를 실행하지 않는다. => 비동기를 동기처럼 순서를 제어하기 쉽다.
+      - await을 앞에 붙이면 resolve될 때까지 다음 코드를 실행하지 않는다. => 비동기 코드를 동기처럼 순서를 제어하기 쉽다.
       - try/catch 문을 통해 에러를 처리할 수 있다.
       - Promise.all 등을 통해 병렬적으로 처리할 수 있다.
       - aysnc 함수는 return 값을 resolve하는 Promise를 반환한다. (리턴값 반환하지 않음)
@@ -269,7 +269,7 @@ userList.forEach((user) => {
   console.log(user);
 });
 
-// Array.prototype.filter() : 배열을 순회하며 각 값을 조건식에 따라 해당하는 요소만 배열로 모아서 반환한다. => 콜백 함수의 return값이 true인 요소만 모아서 반환. 원본배열을 변경하지 않음
+// Array.prototype.filter() : 배열을 순회하며 각 값을 조건식에 따라 해당하는 요소만 배열로 모아서 반환한다.(필터링) => 콜백 함수의 return값이 true인 요소만 모아서 반환. 원본배열을 변경하지 않음
 let filterArr = userList.filter((user) => {
   return user.age >= 30;
 });
