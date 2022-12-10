@@ -68,7 +68,7 @@ let getObj = (name, age) => ({
   age,
 });
 
-console.log(`getObj : ${getObj("신동혁", 20)}`);
+console.log(`getObj : ${getObj("신동혁", 20).name}`);
 
 let user = {
   name: "seok",
@@ -140,3 +140,177 @@ console.log(PINUM);
 console.log(getSum(1, 2));
 
 console.log(math.PI);
+
+let PI = 3.141592;
+
+console.log(PI);
+
+/*
+  Promise
+    - Promise는 비동기 처리를 도와주는 객체. => 주로 서버에서 데이터를 받아올때 사용.
+    - Promise 생성자의 인자로 함수를 전달하다. => 그 함수에 두개의 함수가 전달된다.
+    => resolve : 성공했을 때 실행할 함수. resolve 값을 Promise.prototype.then(콜백함수)의 콜백함수의 첫번째 인자로 전달된다.
+    => reject : 실패했을 때 실행할 함수. reject값을 에러 메시지로 전달한다. => Promise.prototype.catch(콜백함수)의 콜백함수의 첫번째 인자로 에러가 전달된다.
+*/
+let num04 = 5;
+let promise = new Promise(function (resolve, reject) {
+  //resolve(1);
+  //reject("에러 발생!");
+  if (num04 < 10) {
+    reject("숫자가 10보다 작습니다.");
+  }
+  resolve(num04);
+});
+/*
+promise.then(function (res) {
+  console.log(res);
+});
+
+promise.catch(function (err) {
+  console.log(err);
+});
+*/
+promise
+  .then(function (res) {
+    console.log("- New Promise 1 : " + res);
+  })
+  .catch(function (err) {
+    console.log("- New Promise 1 : " + err);
+  });
+
+function getData(str) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve(str);
+    }, 2000);
+  });
+}
+
+function getID(id) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve(id);
+    }, 2000);
+  });
+}
+
+// Promise가 중첩되면 복잡해 진다.
+getData("자바스크립트")
+  .then(function () {
+    return getID(1);
+  })
+  .then(function (res) {
+    console.log("- New Promise 2 : " + res);
+  })
+  .catch((err) => {
+    console.log("- New Promise 2 : " + err);
+  });
+
+/*
+    aysnc/await 무조건 쌍으로 사용함
+      - 함수 키워드 앞에 async를 붙인다.
+      - await을 앞에 붙이면 resolve될 때까지 다음 코드를 실행하지 않는다. => 비동기를 동기처럼 순서를 제어하기 쉽다.
+      - try/catch 문을 통해 에러를 처리할 수 있다.
+      - Promise.all 등을 통해 병렬적으로 처리할 수 있다.
+      - aysnc 함수는 return 값을 resolve하는 Promise를 반환한다. (리턴값 반환하지 않음)
+*/
+async function fetchData() {
+  try {
+    let id = await getID(101); // 2초후 실행
+    let data = await getData(id + "JS"); //2초후 실행
+    console.log("- aysnc/await : ", data, id); //4초후 실행
+
+    let result = await Promise.all([getData("JS"), getID(102)]); //병렬 실행
+    console.log("- aysnc/await : " + result); //4초후 실행
+  } catch (err) {
+    console.log("- aysnc/await : " + err);
+  }
+  return 2;
+}
+
+console.log(fetchData());
+
+// 삼항 연산자
+let result02 = num04 < 10 ? "10보다 작음" : "10보다 크거나 같음";
+console.log("--- " + result02);
+
+/*
+단축 평가
+ - &&(and) : 앞의 값이 truthy한 값이라면 뒤의 값으로 평가되고, 앞의 값이 falsy한 값이라면 앞의 값으로 평가된다.(javascript에서 0은 falsy한 값으로 취급)
+ */
+let color = num04 > 10 && "red";
+console.log("--- color : " + color);
+
+// ||(or) : and와 반대
+let str = "abcdeef" || "안녕하세요";
+console.log("--- str : " + str);
+
+// ??(nullish) : ?? 앞이 null이나 undefined이면, ?? 뒤의 값을 평가하고, 그 외의 값이면 앞의 값으로 평가한다. => 값을 참조해봐서 있으면 그 값을 사용하고 없으면, 대신할 값을 작성하면 된다.
+let value = user.height ?? "할당 안됨";
+console.log("--- value : " + value);
+
+//옵셔널 체이닝 : 참조한 객체의 값이 null 이거나 undefined인 경우 뒤의 프로퍼티를 평가하지 않는다.
+//console.log("---- value1 : " + undefined.age); //에러
+console.log("--- value2 : " + undefined?.age);
+console.log("--- value3 : " + user.age?.height?.str);
+
+/*
+배열 고차 함수 : 배열중에 함수를 전달받는 메소드
+*/
+let userList = [
+  { id: 1, name: "seok", age: 30 },
+  { id: 2, name: "hwangbo", age: 32 },
+  { id: 3, name: "minsu", age: 43 },
+  { id: 4, name: "dongsu", age: 29 },
+];
+
+// Array.prototype.forEach() : 배열을 순회하며 각 값을 인자로 함수를 반복 실행한다.
+userList.forEach((user) => {
+  console.log(user);
+});
+
+// Array.prototype.filter() : 배열을 순회하며 각 값을 조건식에 따라 해당하는 요소만 배열로 모아서 반환한다. => 콜백 함수의 return값이 true인 요소만 모아서 반환. 원본배열을 변경하지 않음
+let filterArr = userList.filter((user) => {
+  return user.age >= 30;
+});
+console.log(filterArr);
+
+let filterArr2 = userList.filter((_, idx) => {
+  return idx % 2 === 1;
+});
+console.log(filterArr2);
+
+let filterArr3 = userList.filter((_, idx) => idx % 2 === 1);
+console.log(filterArr3);
+
+// Array.prototype.map() : 배열을 순회하며 각 요소에 변형을 줄 때 사용 ==> 매 반복마다 return을 새로운 배열로 모아서 반환한다. 기존 배열 변경하지 않는다.
+let mapArr = userList.map((user, idx) => {
+  return user.age;
+});
+console.log("--------------");
+console.log(mapArr);
+
+// age 30 이상인 user의 name 프로퍼티만 배열로 모아서 반환하기
+let mapArr2 = userList.filter((user) => user.age > 30).map((user) => user.name);
+console.log(mapArr2, mapArr2.length);
+
+// Array.prototype.reduce() : 배열을 순회하며 누산을 할 때 사용한다. => 콜백 함수의 첫번째 인자로 누적되고 있는 값, 두번째 인자로는 순회중인 요소의 값이 전달된다.
+let ageArr = userList.map((user) => user.age);
+let totalAge = ageArr.reduce((acc, curr) => acc + curr, 1000); //1000은 초기 acc값
+console.log("--------------");
+console.log(ageArr);
+console.log(totalAge);
+
+//find vs filter는 찻은 첫번째 요소만 반환 vs 조건에 맞는 값을 배열로 반환
+
+//rest 문법 : 매개변수에 ...을 붙이면 전달된 인자가 몇개이던 배열로 모아준다. => 무조건 매개변수의 마지막에 사용해야 한다.
+function getTotal(...numlist) {
+  return numlist.reduce((acc, curr) => acc + curr);
+}
+
+function getTotal2(...numlist) {
+  return numlist.filter((a) => a > 3);
+}
+
+console.log(getTotal(1, 2, 3, 4, 5));
+console.log(getTotal2(1, 2, 3, 4, 5));
