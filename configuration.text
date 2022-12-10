@@ -35,3 +35,5 @@ package.json : 프로젝트 메타데이터, 라이브러리 정보 포함
 -> cmd에서 npm i // node_modules를 다시 설치함
 
 강사 Repository : https://github.com/hbs30832/
+
+화면 Label에 다국어 적용은?
