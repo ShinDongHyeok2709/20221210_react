@@ -25,7 +25,7 @@ function TodoInput() {
   });
 
   /*
-    useMemo : 특정값이 변할 대에만 연산을 하고, 나머지 경우는 기존값을 재사용한다.
+    useMemo : 특정값이 변할 때에만 연산을 하고, 나머지 경우는 기존값을 재사용한다.
   */
   //const undoneTotoCount = countUndoneToto(todos);
   const undoneTotoCount = useMemo(() => countUndoneToto(todos), [todos]);
@@ -45,7 +45,7 @@ function TodoInput() {
   };
 
   useCallback : 해당 메소드의 데이터외 타 데이터 변경시 메소드 재실행 방지 => 성능 최적화 목적
-  useCallback 랜더링시 함수 재생성 여부 vs useMemo는 재계산 여부, useMemo는 리턴값이 필수임
+  useCallback 랜더링시 함수 재호출(함수 재사용) vs useMemo는 재계산(데이터 재사용), useMemo는 리턴값이 필수임
 */
   const handleInput = useCallback(
     (e) => {

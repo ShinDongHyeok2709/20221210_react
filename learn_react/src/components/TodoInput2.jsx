@@ -34,9 +34,6 @@ function TodoInput2({ handleSubmit }) {
         value={inputs.date}
         onChange={handleInput}
       />
-      {/*
-        객체를 return에 출력시 에러가 발생하므로 객체의 속성으로 출력해야 함
-      */}
       <p>
         {inputs.text} {inputs.date}
       </p>

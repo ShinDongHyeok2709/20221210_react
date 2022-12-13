@@ -16,7 +16,7 @@ function Todo() {
   const nextID = useRef(2);
 
   /*
-        useMemo : 특정값이 변할 대에만 연산을 하고, 나머지 경우는 기존값을 재사용한다.
+        useMemo : 특정값이 변할 때에만 연산을 하고, 나머지 경우는 기존값을 재사용한다.
       */
   //const undoneTotoCount = countUndoneToto(todos);
   const undoneTotoCount = useMemo(() => countUndoneToto(todos), [todos]);
