@@ -6,8 +6,10 @@ function Counter() {
   useState(초기값) : [상태값, 업데이트 함수]
   => useState는 비동기적으로 동작하므로, 한 메소드내 setCount를 연달아 작성해도 값이 여러번 변경되지 않는다.
   => 함수형 업데이트 : useState의 인자로 함수를 전달하면 매개변수에 최신상태가 담긴다.
-   setCount((count) => count + opNum);  setCount(count + opNum);를 섞으면 한번만 반영됨.
-   setCount(count + opNum); console.log("test"); setCount(count + opNum); 한번만 반영됨.
+  setCount(count + opNum); console.log("test"); setCount(count + opNum); 한번만 반영됨.
+  setCount((count) => count + opNum);  setCount((count) => count + opNum);하면 2번 호출됨.
+  setCount((count) => count + opNum);  setCount(count + opNum);를 섞으면 한번만 반영됨.
+
 */
   const [count, setCount] = useState(0); //상수로 정의하였으나, 이벤트 발생시 Counter 컴포넌트가 매번 새로 호출하고, useState가 변경된 값을 반영함
 

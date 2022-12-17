@@ -4,13 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Todos from "./components/todos/Todos";
+import Main from "./components/todos/MainPage/Main";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     {/* <Todos /> */}
+    {/* <App /> */}
 
-    <App />
+    <Main />
   </React.StrictMode>
 );
 
