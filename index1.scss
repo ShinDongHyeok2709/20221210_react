@@ -1,0 +1,19 @@
+h1 {
+  color: red;
+}
+
+.gnbList {
+  li {
+    color: blue;
+    &.on {
+      border: 1px solid red;
+    }
+    &.hover {
+      color: red;
+      font-size: 1+2px;
+    }
+    a {
+      color: yellow;
+    }
+  }
+}

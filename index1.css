@@ -1,0 +1,17 @@
+h1 {
+  color: red;
+}
+
+.gnbList li {
+  color: blue;
+}
+.gnbList li.on {
+  border: 1px solid red;
+}
+.gnbList li.hover {
+  color: red;
+  font-size: 3px;
+}
+.gnbList li a {
+  color: yellow;
+}/*# sourceMappingURL=index1.css.map */

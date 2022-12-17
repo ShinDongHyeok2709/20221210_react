@@ -1,0 +1,28 @@
+vs에 sass 플러그인 설치
+- sass 
+- live sass compiler
+
+sass : scss를 css로 변경
+- 태그 중접 표현 가능
+- & : 상위 태그
+- & + & : 인접 태그
+
+vs에서 하단의 Watch... 클릭 -> 동일파일의 .css로 자동 생성
+
+----------------
+
+vs에 webserver 플러그인 설치 : live server
+
+----------------
+
+react 프로젝트에 scss 설치
+npm install styled-components
+
+vs에 styled-components 플러그인 설치 : vscode-styled-components
+
+
+-----------------------
+db접속
+
+tmdb에 계정 생성
+https://www.themoviedb.org/

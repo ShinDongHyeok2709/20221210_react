@@ -3,16 +3,19 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Todos from "./components/todos/Todos";
-import Main from "./components/todos/MainPage/Main";
+import Todos from "./components/todoReducer/Todos";
+import Main from "./components/MainPage/Main";
+import Inputs from "./components/inputs2";
+import Styled from "./components/Styled";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* <Todos /> */}
+    <Todos />
     {/* <App /> */}
-
-    <Main />
+    {/* <Main /> */}
+    {/* <Inputs /> */}
+    {/* <Styled></Styled> */}
   </React.StrictMode>
 );
 
