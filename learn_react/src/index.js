@@ -7,15 +7,17 @@ import Todos from "./components/todoReducer/Todos";
 import Main from "./components/MainPage/Main";
 import Inputs from "./components/inputs2";
 import Styled from "./components/Styled";
+import TestUseArrayObjectInput from "./TestUseArrayObjectInput";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Todos />
+    {/* <Todos /> */}
     {/* <App /> */}
     {/* <Main /> */}
     {/* <Inputs /> */}
     {/* <Styled></Styled> */}
+    <TestUseArrayObjectInput />
   </React.StrictMode>
 );
 

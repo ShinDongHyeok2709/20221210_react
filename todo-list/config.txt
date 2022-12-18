@@ -1,0 +1,43 @@
+https://snippet-generator.app/
+React Functional Component
+rfc
+import React from "react";
+
+export default function TodoCreate () {
+
+    return (<div></div>);
+}
+control + shift + p
+javascriptreact.json에 아래 카피
+
+  "React Functional Component": {
+    "prefix": "rfc",
+    "body": [
+      "import React from \"react\";",
+      "",
+      "export default function ${TM_FILENAME_BASE} () {",
+      "",
+      "    $2return (<div>$1</div>);",
+      "}"
+    ],
+    "description": "React Functional Component"
+  }
+
+에디터에서 함수명 수정
+
+에디터에서 rfc로 치면 나옴
+.jsx만 가능함
+
+npm install styled-components 설치
+
+npm install react-icons --save
+
+npm install polished
+
+아이콘 사용
+https://react-icons.github.io/react-icons/search?q=trash
+
+타입스크립트?
+
+위아래 스크롤
+https://alvarotrigo.com/fullPage/ko/
