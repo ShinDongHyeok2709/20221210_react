@@ -7,7 +7,7 @@ export default function TodoCreate () {
 
     return (<div></div>);
 }
-control + shift + p
+control + shift + p -> 코드 조각:사용자 코드 조각 구성(Snippets: Configure User Snippets)
 javascriptreact.json에 아래 카피
 
   "React Functional Component": {
