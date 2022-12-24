@@ -1,0 +1,47 @@
+< Router 사용법 >
+
+설치 : npm install react-router-dom
+
+index.js에서 import { BrowserRouter } from "react-router-dom";하여 <BrowserRouter>로 전체를 감쌈
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
+Appp 컴포넌트에서 
+1. 링크 생성 : 
+        <a href="/">Main</a> 혹은
+        <Link to="/">Main</Link>
+
+        위는 페이지전체가 다시 호출되며, 아래는 호출되는 컴포넌트만 호출됨
+
+2. 컴포넌트 생성 및 디스플레이 : 
+import { Routes, Route } from "react-router-dom";
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="hello" element={<Hello />} />
+      </Routes>
+
+책은 버전 5로 구성되어 있어 Router 관련 태그명이 상이함
+현재 사용 버전은 6임
+
+파라미터 : 
+https://www.naver.com => index.html
+https://www.naver.com/users/24588532 => :id => 파라미터
+
+쿼리스트링 : name과 value 쌍
+여러개 정보가 필요할때 사용법
+https://www.naver.com/users?name=seok&age=30 => 쿼리스트링, Javascript로 표현하면 {name:seok, age:30}임
+
+
+< README.md > 
+markdown
+vs에서 돋보기 클릭시 실시간 브라우징
+# : h2
+## : h2
+### : h3
+```javascript ``` : 언어로 작성한 코드 블럭
+```javascript
+내용
+```
