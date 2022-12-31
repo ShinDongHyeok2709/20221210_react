@@ -4,6 +4,7 @@ import Detail from "./components/Detail";
 import Header from "./components/Header";
 import Hello from "./components/Hello";
 import Main from "./components/Main";
+import Movies from "./components/movies/Movies";
 {
   /*<Route path=":userID" element={<Detail />} />*/
 }
@@ -12,7 +13,7 @@ export default function App() {
     alert("1번 클릭");
   };
 
-  return (
+  /* 
     <>
       <Header />
       <Routes>
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="hello/:userID" element={<Detail />} />
         <Route path="hello" element={<Hello />} />
       </Routes>
-    </>
-  );
+      </>
+      */
+  return <Movies />;
 }
