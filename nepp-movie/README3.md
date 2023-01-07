@@ -57,7 +57,9 @@ console.log(data);
 # 이벤트 전파 막는법
 
 1. e.stopPropagation
-2. <span /> 태그에 이벤트를 기술하여 분리함
+2. `<span />` 태그에 이벤트를 기술하여 분리함
+
+e.preventDefault는 고유 동작을 중단시키고, e.stopPropagation 는 상위 엘리먼트들로의 이벤트 전파를 중단함.
 
 # 에러처리
 
