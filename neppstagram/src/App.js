@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-import NavBar from "./components/common/NavBar";
 import Home from "./components/pages/Home";
 import Edit from "./components/pages/Edit";
 import Main from "./components/pages/Main";
@@ -15,14 +14,18 @@ export default function App() {
       <Wrapper>
         <Routes>
           <Route path="/*" element={<Main />}>
-            <Route path="home" element={<Home />} />
+            <Route path="" element={<Home />} />
             <Route path="search" element={<Search />} />
-            <Route path="edit" element={<Edit />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
+            <Route path="edit">
+              <Route path="" element={<Edit />} />
+              <Route path=":id" element={<Edit />} />
+            </Route>
 
-          <Route path="signin" element={<SignIn />} />
-          <Route path="signup" element={<SignUp />} />
+            <Route path="profile" element={<Profile />} />
+
+            <Route path="signin" element={<SignIn />} />
+            <Route path="signup" element={<SignUp />} />
+          </Route>
         </Routes>
       </Wrapper>
     </Container>

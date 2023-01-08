@@ -15,7 +15,7 @@ export default function Profile() {
     getCurrentUser()
       .then((response) => {
         console.log("response : ", response);
-        setUser(response.data.data);
+        setUser(response);
       })
       .catch((error) => console.log("error : ", error));
   }, [user]);

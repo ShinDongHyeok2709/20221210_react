@@ -1,43 +1,45 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { signInUser } from "../../api/admin";
+import { ACCESS_TOKEN, getCurrentUser, signInUser } from "../../api/admin";
 import { useInput } from "../../hooks/useInput";
 import AdminForm from "../admin/AdminForm";
 import { Button, Input } from "../common/Input";
+import { useUserIdDispatchContext } from "../data/auth";
 
-export const ACCESS_TOKEN = "ACCESS_TOKEN";
 export default function SignIn() {
   const initialUser = { email: "", password: "" };
 
   const [inputs, handleInputs, restInputs] = useInput(initialUser);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     localStorage.clear();
 
+    const token = await signInUser(inputs);
+
+    restInputs();
+    navigate("/");
+
+    /*
     signInUser(inputs)
       .then((request) => {
         console.log("request : ", request);
-        if (request.data.success) {
-          const token = request.data.data.token;
-          //console.log("token : ", token);
-          window.localStorage.setItem(ACCESS_TOKEN, token);
-          console.log(
-            "localStorage token : ",
-            window.localStorage.getItem(ACCESS_TOKEN)
-          );
+        window.localStorage.setItem(ACCESS_TOKEN, request);
+        console.log(
+          "localStorage token : ",
+          window.localStorage.getItem(ACCESS_TOKEN)
+        );
 
-          restInputs();
-          //window.location.href = "/";
-          navigate("/home");
-        } else {
-        }
+        restInputs();
+        //window.location.href = "/";
+        navigate("/home");
       })
       .catch((error) => console.log("error : ", error));
+        */
   };
-
-  const navigate = useNavigate();
 
   const handleGotoSignUp = () => {
     navigate("/signup");

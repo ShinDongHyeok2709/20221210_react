@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { ACCESS_TOKEN } from "../../api/admin";
 import { Button } from "../common/Input";
 import NavBar from "../common/NavBar";
-import { ACCESS_TOKEN } from "./SignIn";
 
 export default function Main() {
   const navigate = useNavigate();
@@ -34,4 +34,5 @@ const Container = styled.div`
 const OutletWrapper = styled.div`
   display: flex;
   flex: 1;
+  overflow: auto;
 `;

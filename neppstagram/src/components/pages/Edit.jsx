@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { Button } from "../common/Input";
-import { postContent } from "../../api/admin";
+import { converURL, getContentById, postContent } from "../../api/admin";
+import { useParams } from "react-router-dom";
 
 function Preview({ url }) {
   return (
@@ -15,6 +16,32 @@ function Preview({ url }) {
 export default function Edit() {
   const [inputs, setInputs] = useState({ content: "", images: [] });
   const [previewURLs, setPreviewURLs] = useState([]);
+
+  const { id } = useParams();
+
+  const [post, setPost] = useState(null);
+
+  useEffect(() => {
+    if (id) {
+      getContentById(id)
+        .then((request) => {
+          console.log("request : ", request);
+
+          setPost(request);
+          setInputs(() => ({ ...inputs, content: request.content }));
+
+          setPreviewURLs(request.img_list.map((img) => img.url));
+
+          Promise.all(
+            request.img_list.map((img) => {
+              const file = converURL(img.url);
+              return file;
+            })
+          ).then((res) => console.log(res));
+        })
+        .catch((error) => console.log("error : ", error));
+    }
+  }, [id]);
 
   const handleInput = (e) => {
     setInputs((inputs) => ({ ...inputs, content: e.target.value }));
@@ -87,8 +114,10 @@ export default function Edit() {
     <Container>
       <Textarea
         placeholder="글을 입력해 주세요!"
+        value={post?.content}
         onChange={handleInput}
       ></Textarea>
+
       <ImageWrapper>
         {previewURLs.map((url, idx) => (
           <Preview url={url} key={idx} />
