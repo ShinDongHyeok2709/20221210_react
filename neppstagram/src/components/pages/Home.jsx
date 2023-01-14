@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useQuery } from "react-query";
 import styled from "styled-components";
 import { getContents, getCurrentUser } from "../../api/admin";
 import { useUserIdContext, useUserIdDispatchContext } from "../data/auth";
@@ -10,6 +11,17 @@ export default function Home() {
   const [isLast, setIsLast] = useState(false);
 
   const dispatch = useUserIdDispatchContext();
+
+  //const { data, isLoading } = useQuery("posts", () => getContents(page));
+  const { data, isLoading } = useQuery("posts", () => getContents(page), {
+    onSuccess: (data) => {
+      console.log("data : ", data);
+      setPostList(data);
+    },
+    onError: (error) => {
+      alert(error.response.data.message);
+    },
+  });
 
   /*
   const handleNext = () => {
@@ -44,6 +56,7 @@ export default function Home() {
       .catch((error) => console.log("error : ", error));
   }, [page]);
 
+  if (isLoading) return <div>로딩중...</div>;
   console.log("page : ", page);
   console.log(postList.length + "postList : ", postList);
   return (

@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useMutation, useQuery } from "react-query";
 import styled from "styled-components";
+import { client } from "../..";
 import { deleteComment, getComments, postComment } from "../../api/admin";
 import { useUserIdContext } from "../data/auth";
 
@@ -9,6 +11,47 @@ export default function CommentList({ postId }) {
   const [input, setInput] = useState("");
 
   const currentUserID = useUserIdContext();
+
+  //등록하는 함수 만들기
+  const postCommentMutate = useMutation(postComment, {
+    onMutate: (form) => {
+      console.log("form : ", form);
+    },
+    onSuccess: (result) => {
+      //setCommentList([...commentList, result]);
+      client.fetchQuery("comments");
+    },
+    onError: (err) => {
+      console.log("err : ", err);
+    },
+  });
+
+  const deleteCommentMutate = useMutation(deleteComment, {
+    onMutate: (form) => {
+      console.log("form : ", form);
+    },
+    onSuccess: (result) => {
+      //setCommentList([...commentList, result]);
+      client.invalidateQueries("comments");
+    },
+    onError: (err) => {
+      console.log("err : ", err);
+    },
+  });
+
+  const { data, isLoading, error } = useQuery(
+    "comments",
+    () => getComments(postId, page),
+    {
+      onSuccess: (result) => {
+        console.log("result : ", result);
+        setCommentList(result);
+      },
+      onError: (err) => {
+        console.log("err : ", err);
+      },
+    }
+  );
 
   const getData = useCallback(() => {
     getComments(postId, page)
@@ -33,6 +76,8 @@ export default function CommentList({ postId }) {
 
     if (!window.confirm("댓글을 삭제하시겠습니까?")) return;
 
+    deleteCommentMutate.mutate(commentId);
+    /*
     deleteComment(commentId)
       .then((request) => {
         console.log("request : ", request);
@@ -43,6 +88,7 @@ export default function CommentList({ postId }) {
         );
       })
       .catch((error) => console.log("error : ", error));
+      */
   };
 
   const handleSubmit = async (e) => {
@@ -51,11 +97,16 @@ export default function CommentList({ postId }) {
       return;
     }
     //e.preventDefault();
-    const result = await postComment({ postId, content: input });
 
+    /*
+    const result = await postComment({ postId, content: input });
     setCommentList([...commentList, result]);
+    */
+
+    postCommentMutate.mutate({ postId, content: input });
   };
 
+  if (isLoading) return <div>로딩중...</div>;
   console.log(
     "---------" + commentList.length + " commentList : ",
     commentList
@@ -73,7 +124,8 @@ export default function CommentList({ postId }) {
         </CommmentItem>
       ))}
       <BtnMore onClick={handleMoreComments}>
-        더보기 ({commentList.length}/?)
+        더보기 ({commentList.length}/
+        {commentList.length < 10 ? commentList.length : "?"})
       </BtnMore>
       <InputBox>
         <InputCommment

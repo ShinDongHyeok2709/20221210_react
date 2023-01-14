@@ -11,17 +11,23 @@ export default function SignIn() {
 
   const [inputs, handleInputs, restInputs] = useInput(initialUser);
 
+  const dispatch = useUserIdDispatchContext();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     localStorage.clear();
 
-    const token = await signInUser(inputs);
+    try {
+      const token = await signInUser(inputs);
 
-    restInputs();
-    navigate("/");
+      const user = await getCurrentUser();
+      dispatch(user.id);
+      restInputs();
+      navigate("/");
+    } catch (error) {
+      alert(error.response.data.message);
+    }
 
     /*
     signInUser(inputs)
@@ -68,9 +74,6 @@ export default function SignIn() {
         <Button bgColor="#ddd" type="button" onClick={handleGotoSignUp}>
           회원가입
         </Button>
-        <div style={{ textAlign: "center" }}>
-          <Link to="/signup">회원가입</Link>
-        </div>
       </BtnWrapper>
     </AdminForm>
   );

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useMutation } from "react-query";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { postUser } from "../../api/admin";
 import { useInput } from "../../hooks/useInput";
@@ -13,19 +14,41 @@ export default function SignUp() {
 
   const { name, email, password } = inputs;
   const active = name !== "" && email !== name && password !== "";
+  const navigate = useNavigate();
+
+  const signupMutate = useMutation(postUser, {
+    onMutate: (form) => {
+      console.log("form : ", form);
+    },
+    onSuccess: () => {
+      alert("회원가입에 성공했습니다.");
+      navigate("/signin");
+    },
+    onError: (error) => {
+      console.log("error : ", error.response.data.message);
+    },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!active) return;
 
+    signupMutate.mutate({ name, email, password });
+    /*
     postUser(inputs)
       .then((request) => {
         console.log("request : ", request);
         resetInputs();
-        window.location.href = "/signin";
+        alert("회원가입에 성공했습니다!");
+        //window.location.href = "/signin";
+        navigate("/signin");
       })
-      .catch((error) => console.log("error : ", error));
+      .catch((error) => {
+        console.log("error : ", error);
+        alert("이메일과 비밀번호를 확인하세요!");
+      });
+      */
   };
 
   //console.log("inputs : ", inputs);

@@ -7,6 +7,7 @@ import Profile from "./components/pages/Profile";
 import Search from "./components/pages/Search";
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
+import User from "./components/pages/User";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
 
             <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
+            <Route path="user/:id" element={<User />} />
           </Route>
         </Routes>
       </Wrapper>

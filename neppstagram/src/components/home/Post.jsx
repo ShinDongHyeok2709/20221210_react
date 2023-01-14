@@ -15,7 +15,7 @@ export default function Post({ post }) {
 
   return (
     <Container>
-      <UserInfo author={author} />
+      <UserInfo user={author} />
       <PostImageBox img_list={img_list} />
       <div style={{ textAlign: "right", fontSize: "0.5rem" }}>
         {author.id === userID && <Link to={`edit/${id}`}>수정하기</Link>}
@@ -30,7 +30,6 @@ export default function Post({ post }) {
 }
 
 const Container = styled.div`
-  flex: 1;
   width: 100%;
   & + & {
     border-top: 1px solid #eee;

@@ -16,7 +16,6 @@ export default function Main() {
 
   return (
     <Container>
-      메인
       <OutletWrapper>
         <Outlet />
       </OutletWrapper>

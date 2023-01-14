@@ -34,6 +34,7 @@ export default function PostImageBox({ img_list }) {
 }
 
 const Container = styled.div`
+  overflow: hidden;
   position: relative;
 `;
 const Wrapper = styled.ul`
@@ -41,8 +42,6 @@ const Wrapper = styled.ul`
   height: 250px;
 
   background-color: #ddd;
-
-  overflow: hidden;
 
   transition: transform 0.25s;
   ${({ idx }) => css`

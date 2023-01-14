@@ -18,7 +18,7 @@ export default function Profile() {
         setUser(response);
       })
       .catch((error) => console.log("error : ", error));
-  }, [user]);
+  }, []);
 
   const handleUploadFile = (e) => {
     console.log("files : ", e.target.files[0]);
@@ -61,7 +61,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  flex: 1;
+  display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
@@ -83,4 +83,9 @@ const ProfileCircle = styled.label`
   border-radius: 50%;
 
   overflow: hidden;
+  cursor: pointer;
+
+  img {
+    width: 300px;
+  }
 `;

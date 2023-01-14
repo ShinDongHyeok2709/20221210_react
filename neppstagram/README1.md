@@ -47,3 +47,21 @@ onChange={handleUploadFile}
 />
 <img src={preview} alt="" width="200" />
 ```
+
+# react query
+
+npm install react-icon
+
+```javascript
+const client = new QueryClient();
+root.render(
+  <Router>
+    <ContextProvider>
+      <QueryClientProvider client={client}>
+        <App />
+      </QueryClientProvider>
+    </ContextProvider>
+  </Router>
+);
+```
+

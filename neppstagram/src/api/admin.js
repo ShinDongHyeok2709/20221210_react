@@ -13,12 +13,17 @@ axios.defaults.baseURL = "http://101.101.218.43";
 /*
  */
 export const postUser = async (form) => {
+  /*
   try {
     const result = await axios.post("/users", { ...form });
     return result;
   } catch (error) {
     console.log("error", error);
+    throw new Error(error.message);
   }
+  */
+  const result = await axios.post("/users", { ...form });
+  return result;
 };
 
 export const signInUser = async (form) => {
@@ -55,8 +60,8 @@ export const patchProfile = async (form) => {
 
 export const postContent = async (form) => {
   try {
-    const result = await axios.post("/posts", form);
-    return result;
+    const { data } = await axios.post("/posts", form);
+    return data.data;
   } catch (error) {
     console.log("error", error);
   }
@@ -136,6 +141,39 @@ export const getContentById = async (postId) => {
     const { data } = await axios.get("/posts/" + postId);
     //const { data } = await axios.get("/comments");
     console.log("getContentById data : ", data);
+    return data.data;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
+export const searchUser = async (name) => {
+  try {
+    const { data } = await axios.get("/users/search", { params: { name } });
+    //const { data } = await axios.get("/comments");
+    console.log("searchUser data : ", data);
+    return data.data;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
+export const getUserbyId = async (id) => {
+  try {
+    const { data } = await axios.get("/users/" + id);
+    //const { data } = await axios.get("/comments");
+    console.log("getUserbyId data : ", data);
+    return data.data;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
+export const getPostbyUserId = async (id) => {
+  try {
+    const { data } = await axios.get("/posts/author/" + id);
+    //const { data } = await axios.get("/comments");
+    console.log("getUserPost data : ", data);
     return data.data;
   } catch (error) {
     console.log("error", error);

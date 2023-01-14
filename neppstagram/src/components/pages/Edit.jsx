@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { Button } from "../common/Input";
 import { converURL, getContentById, postContent } from "../../api/admin";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 function Preview({ url }) {
   return (
@@ -21,6 +21,7 @@ export default function Edit() {
 
   const [post, setPost] = useState(null);
 
+  const navigate = useNavigate();
   useEffect(() => {
     if (id) {
       getContentById(id)
@@ -47,7 +48,7 @@ export default function Edit() {
     setInputs((inputs) => ({ ...inputs, content: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     if (!inputs.content) {
       alert("content가 부재하니, 데이터를 등록하세요!");
       return;
@@ -67,13 +68,22 @@ export default function Edit() {
 
     console.log("input : ", inputs);
 
+    /* 
     postContent(form)
-      .then((request) => {
-        console.log("request : ", request);
-        setInputs({ content: "", images: [] });
-        //setPreviewURLs([]);
-      })
-      .catch((error) => console.log("error : ", error));
+        .then((request) => {
+          console.log("request : ", request);
+          setInputs({ content: "", images: [] });
+          //setPreviewURLs([]);
+        })
+        .catch((error) => console.log("error : ", error));
+    */
+    try {
+      const post = await postContent(form);
+      navigate("/post/" + post.id);
+    } catch (error) {
+      console.log("error", error);
+      alert(error.response.data.message);
+    }
   };
 
   const handleUploadImage = (e) => {
@@ -147,6 +157,8 @@ export default function Edit() {
 const Container = styled.div`
   width: 100%;
   padding: 20px;
+
+  position: relative;
 `;
 
 const Textarea = styled.textarea`
@@ -165,12 +177,14 @@ const ImageWrapper = styled.div`
 `;
 const BtnInput = styled.label`
   display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 100px;
   height: 100px;
 
-  margin-top: 30px;
-
   border: 2px solid #eee;
+  cursor: pointer;
 `;
 
 const PreviewBox = styled.div`
@@ -182,4 +196,8 @@ const PreviewBox = styled.div`
   height: 100px;
 
   overflow: hidden;
+
+  img {
+    width: 200px;
+  }
 `;
