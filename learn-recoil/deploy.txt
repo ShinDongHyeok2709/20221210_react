@@ -1,0 +1,110 @@
+npx create-react-app deploy_app
+Git 때문에 기존 프로젝트 폴더와 다른 곳에서 생성
+https://github.com/에서 deploy_app을 public으로 생성
+
+
+C:\Users\Neppplus_\Desktop\20230115_react_deploy\deploy_app\build
+
+https://github.com/에서 "ShinDongHyeok2709.github.io"로 Repository 생성
+https://github.com/ShinDongHyeok2709/ShinDongHyeok2709.github.io/upload 클릭
+npm run build
+add file > create new file
+index.html 생성
+
+
+settings > pages > branch main root save함
+
+브라우저에서 https://shindonghyeok2709.github.io/ 입력해서 확임
+
+
+1. package-lock.json에 "homepage": "https://shindonghyeok2709.github.io/deploy_app", 추가
+
+2. npm run build
+3. C:\Users\Neppplus_\Desktop\20230115_react_deploy\deploy_app\build내 파일을 
+브라우저 https://github.com/ShinDongHyeok2709/deploy_app에 빌드 파일 드래그로 업로드
+
+4. 브라우저 https://shindonghyeok2709.github.io/deploy_app/ 확인
+
+deploy_app 리포지토리 삭제후 다시 생성
+vs에서 아래 입력
+/*
+echo "# deploy_app" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/ShinDongHyeok2709/deploy_app.git
+git push -u origin main
+*/
+git add .
+git commit -m "init"
+
+git branch -M "main"
+
+git branch
+
+git remote add origin https://github.com/ShinDongHyeok2709/deploy_app.git
+
+git push -u origin main
+
+npm install -D gh-pages (개발용  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  } 추가됨
+
+
+package-lock.json에 아래 추가
+"scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
+  },
+
+
+vs에서 npm run deploy
+
+
+Actions에서 set up a workflow yourself 
+name: Deploy
+on: 
+  push: 
+    branches: ["main"]
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+  
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name : Node.js
+        uses : actions/setup-node@v3
+        with :
+          node-version: 12.x
+      - name : install dependcies
+        run : npm install
+      
+      - name : build app
+        run : npm run build
+      
+      - name : deploy app
+        uses : peaceiris/actions-gh-pages@v3
+        with : 
+          github-token: ${{secrets.GH_ACTIONS_TOKEN}}
+          publish_dir: ./build
+
+
+
+프로필
+Settings Developer settings
+
+톤큰 생성
+
+
+
+
+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
